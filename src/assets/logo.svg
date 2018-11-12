@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 500">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Web_1920_1);
+      }
+
+      .cls-2 {
+        fill: #ee6ca0;
+      }
+
+      .cls-3 {
+        fill: #eb924d;
+      }
+
+      .cls-4 {
+        fill: #e8c92e;
+      }
+    </style>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="400" height="500"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" class="cls-1">
+    <g id="Group_1" data-name="Group 1" transform="translate(-1131 -9.453)">
+      <path id="Path_3" data-name="Path 3" class="cls-2" d="M0,0,238.287,82.544,0,165.088Z" transform="matrix(-0.259, 0.966, -0.966, -0.259, 1360.308, 84.048)"/>
+      <path id="Path_4" data-name="Path 4" class="cls-3" d="M0,0,238.287,82.544,0,165.088Z" transform="translate(1480.013 261.197) rotate(150)"/>
+      <path id="Path_5" data-name="Path 5" class="cls-4" d="M0,0,238.287,82.544,0,165.088Z" transform="matrix(-0.966, -0.259, 0.259, -0.966, 1436.431, 477.853)"/>
+    </g>
+  </g>
+</svg>
