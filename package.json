@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.11",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
     "vue": "^2.5.17"
   },
   "devDependencies": {

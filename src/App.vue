@@ -16,7 +16,7 @@
       <div class="col-sm d-flex flex-wrap flex-column align-items-center">
         <BobaBase title="Base" sub-title="It's important-- after all, tea is 50% of 'milk tea'!"></BobaBase>
         <BobaToppings title="Toppings" sub-title="Is it really bubble tea if there are no toppings?"></BobaToppings>
-        <b-button class="text-center mb-3" size="lg" variant="primary">I'M FINISHED!</b-button>
+        <b-button class="text-center mb-3" size="lg" variant="primary" @click="">I'M FINISHED!</b-button>
       </div>
       
       <div class="col-sm d-flex justify-content-center align-items-center">
@@ -45,6 +45,11 @@ export default {
     BobaBase,
     BobaToppings,
     BobaShops
+  },
+  methods: {
+    getToppingsFromDb: function () {
+
+    }
   }
 }
 </script>
