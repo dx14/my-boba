@@ -1,0 +1,64 @@
+@import "variables";
+
+$body-bg: $sazerac;
+$body-color: $chicago;
+$theme-colors: (
+  "primary": $jaffa,
+  "secondary": $twine
+);
+$font-family-sans-serif: $raleway;
+$headings-font-family: $poppins;
+$headings-font-weight: 800;
+$component-active-bg: $frolly;
+$btn-active-bg: $frolly;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+@each $color, $value in $theme-colors {
+  @if $color == primary {
+    .btn-#{$color} {
+      color: color('white');
+    }
+  }
+  .btn-outline-#{$color} {
+    $background-color: color('white');
+    $border: $value;
+    $active-color: $frolly;
+    @include button-outline-variant($value, $color-hover: $active-color, $active-background: $background-color, $active-border: $active-color);
+    background-color: $background-color;
+
+    @include hover {
+      &:focus,
+      &.focus {
+        box-shadow: 0 0 0 $btn-focus-width rgba($active-color, .5);
+      }
+    }
+  
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active,
+    .show > &.dropdown-toggle {
+      color: $active-color;
+
+      &:focus,
+      &.focus {
+        // Avoid using mixin so we can pass custom focus shadow properly
+        @if $enable-shadows and $btn-active-box-shadow != none {
+          box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba($active-color, .5);
+        } @else {
+          box-shadow: 0 0 0 $btn-focus-width rgba($active-color, .5);
+        }
+      }
+    }
+  }
+}
+
+// // Button variants
+// // Easily pump out default styles, as well as :hover, :focus, :active,
+// // and disabled options for all buttons
+// @include button-variant($background, $border, $hover-background: darken($background, 7.5%), $hover-border: darken($border, 10%), $active-background: darken($background, 10%), $active-border: darken($border, 12.5%));
+// @include button-outline-variant($color, $color-hover: color-yiq($color), $active-background: $color, $active-border: $color);
+
+
+.btn {
+  border-width: 3px;
+}

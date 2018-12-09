@@ -4,8 +4,8 @@
     <b-form-group>
       <b-form-radio-group v-model="selected"
                              buttons
-                             button-variant="outline-primary"
-                             size="lg"
+                             button-variant="outline-secondary"
+                             size="sm"
                              name="buttons2"
                              :options="options">
       </b-form-radio-group>
