@@ -4,8 +4,8 @@
     <b-form-group>
       <b-form-checkbox-group v-model="selectedToppings"
                              buttons
-                             button-variant="outline-primary"
-                             size="lg"
+                             button-variant="outline-secondary"
+                             size="sm"
                              name="buttons2"
                              :options="toppings">
       </b-form-checkbox-group>
