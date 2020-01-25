@@ -10,21 +10,20 @@
 
 <script>
 export default {
-  name: 'AppHeader',
+  name: "AppHeader",
   props: {
     title: String,
     subTitle: String
   }
-}
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1 {
-    font-size: 6em;
-  }
-  .section_header_icon {
-    height: 6em;
-    width: 6em;
-  }
+h1 {
+  font-size: 6em;
+}
+.section_header_icon {
+  height: 6em;
+  width: 6em;
+}
 </style>

@@ -2,23 +2,26 @@
   <div class="">
     <SectionHeader v-bind:title="title" v-bind:sub-title="subTitle" />
     <b-form-group>
-      <b-form-checkbox-group v-model="selectedToppings"
-                             buttons
-                             button-variant="outline-secondary"
-                             size="sm"
-                             name="buttons2"
-                             :options="toppings">
+      <b-form-checkbox-group
+        v-model="selectedToppings"
+        buttons
+        button-variant="outline-secondary"
+        size="sm"
+        name="buttons2"
+        :options="toppings"
+      >
       </b-form-checkbox-group>
     </b-form-group>
   </div>
 </template>
 
 <script>
+import ToppingsService from "../services/topping";
+import SectionHeader from "./SectionHeader";
+import { mutations } from "../state";
 
-import SectionHeader from './SectionHeader.vue'
-  
 export default {
-  name: 'BobaToppings',
+  name: "BobaToppings",
   components: {
     SectionHeader
   },
@@ -26,25 +29,30 @@ export default {
     title: String,
     subTitle: String
   },
-  data () {
+  data() {
     return {
-      selectedToppings: [], // Must be an array reference!
-      toppings: [
-        {text: 'Tapioca', value: 'tapioca'},
-        {text: 'Grass Jelly', value: 'grassJelly'},
-        {text: 'Pudding', value: 'pudding'},
-        {text: 'Red Bean', value: 'redBean'},
-        {text: 'Popping Jelly', value: 'poppingJelly'},
-        {text: 'Mung Bean', value: 'mungBean'},
-        {text: 'Aloe Vera', value: 'aloeVera'},
-        {text: 'Lychee Jelly', value: 'lycheeJelly'},
-        {text: 'Coffee Jelly', value: 'coffeeJelly'}
-      ]
+      selectedToppings: [],
+      toppings: []
+    };
+  },
+  async mounted() {
+    const response = await ToppingsService.getAllToppings();
+    if (response) {
+      this.toppings = response.data.map(topping => {
+        return {
+          text: topping.displayName,
+          value: topping.name
+        };
+      });
+    }
+  },
+  watch: {
+    selectedToppings: (newToppings, oldToppings) => {
+      mutations.updateSelectedToppings(newToppings);
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>

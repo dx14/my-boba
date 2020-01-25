@@ -10,24 +10,20 @@
 
 <script>
 export default {
-  name: 'SectionHeader',
+  name: "SectionHeader",
   props: {
     title: String,
     subTitle: String
   }
-}
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h2 {
-    font-size: 3em;
-  }
-  .section_header {
-    margin-left: -3em;
-  }
-  .section_header_icon {
-    height: 3em;
-    width: 3em;
-  }
+h2 {
+  font-size: 3em;
+}
+.section_header_icon {
+  height: 3em;
+  width: 3em;
+}
 </style>
