@@ -1,75 +1,96 @@
 <template>
-  <div class="">
+  <div>
+    <!-- Initial section when no selection has been made -->
     <SectionHeader v-bind:title="title" v-bind:sub-title="subTitle" />
-    <b-list-group>
-      <b-list-group-item href="#" active class="flex-column align-items-start">
-        <address>
-          <strong>Kung Fu Tea</strong><br />
-          1355 Market St, Suite 900<br />
-          San Francisco, CA 94103<br />
-          <abbr title="Phone">P:</abbr> (123) 456-7890
-        </address>
-      </b-list-group-item>
-      <b-list-group-item href="#" class="flex-column align-items-start">
-        <address>
-          <strong>TeaTop</strong><br />
-          4434 East Main Street<br />
-          Cupertino, CA 94103<br />
-          <abbr title="Phone">P:</abbr> (123) 456-2229
-        </address>
-      </b-list-group-item>
+    <b-alert show variant="secondary" v-if="!hasFetched">
+      Select your tea and toppings to see matching bubble tea stores in your
+      area!
+    </b-alert>
+
+    <!-- Loading section -->
+    <div class="pt-3" v-if="loading">
+      <h3>We got your order!</h3>
+      <span>Please wait while we fetch your bubble tea stores...</span>
+      <div class="d-flex justify-content-center mb-3">
+        <b-spinner variant="danger" label="Loading..."></b-spinner>
+      </div>
+    </div>
+ 
+    <!-- No Valid Stores Found -->
+    <b-alert show variant="secondary" v-if="noStoresLoaded">
+      No stores were found with your selected criteria...
+    </b-alert>
+
+    <!-- Store section after load -->
+    <b-list-group v-for="storeInfo in storeInfo" :key="storeInfo.id">
       <b-list-group-item
-        href="#"
-        disabled
+        :href="storeInfo.url"
+        target="_blank"
         class="flex-column align-items-start"
       >
         <address>
-          <strong>Sweet Hut</strong><br />
-          1606 Oakmont Cr<br />
-          San Jose, CA 94104<br />
-          <abbr title="Phone">P:</abbr> (123) 455-7388
+          <strong>{{ storeInfo.name }}</strong
+          ><br />
+          {{ getAddress(storeInfo.location) }}<br />
+          {{ getCityStateZip(storeInfo.location) }} <br />
+          {{ storeInfo.display_phone }}
         </address>
       </b-list-group-item>
     </b-list-group>
-
-    <!-- list-group-content.vue -->
-
-    <!-- list-group.vue -->
   </div>
 </template>
 
 <script>
-import StoresService from "../services/store";
 import SectionHeader from "./SectionHeader.vue";
+import { EventBus } from "../event-bus.js";
 
 export default {
   name: "BobaStores",
   components: {
-    SectionHeader
+    SectionHeader,
   },
   props: {
     title: String,
-    subTitle: String
+    subTitle: String,
   },
   data() {
     return {
-      stores: []
+      loading: false,
+      storeInfo: [],
+      finishBtnClicked: false,
+      storesLoaded: false,
+      noStoresLoaded: false,
     };
   },
+  computed: {
+    hasFetched() {
+      return this.finishBtnClicked;
+    },
+  },
+  methods: {
+    getAddress(location) {
+      return `${location.address1}, ${location.address2}`;
+    },
+    getCityStateZip(location) {
+      return location.display_address.slice(-1)[0];
+    },
+  },
   async mounted() {
-    const response = await StoresService.getAllStores();
-    if (response) {
-      this.stores = response.data.map(store => {
-        return {
-          name: store.name,
-          displayName: store.displayName,
-          teas: store.teas,
-          toppings: store.toppings
-        };
+    EventBus.$on("store-fetch-started", () => {
+      this.noStoresLoaded = false;
+      this.storeInfo = [];
+      this.finishBtnClicked = true;
+      this.loading = true;
+    }),
+      EventBus.$on("store-info-updated", (storeInfo) => {
+        this.storeInfo = storeInfo.slice(0, 3);
+        this.loading = false;
+        this.storesLoaded = true;
+
+        if (storeInfo == 0) {
+          this.noStoresLoaded = true;
+        }
       });
-    }
-  }
+  },
 };
 </script>
-
-<style scoped></style>

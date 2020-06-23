@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class>
     <SectionHeader v-bind:title="title" v-bind:sub-title="subTitle" />
     <b-form-group>
       <b-form-checkbox-group
@@ -7,7 +7,6 @@
         buttons
         button-variant="outline-secondary"
         size="sm"
-        name="buttons2"
         :options="toppings"
       >
       </b-form-checkbox-group>
@@ -47,12 +46,9 @@ export default {
     }
   },
   watch: {
-    selectedToppings: (newToppings, oldToppings) => {
+    selectedToppings: newToppings => {
       mutations.updateSelectedToppings(newToppings);
     }
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>

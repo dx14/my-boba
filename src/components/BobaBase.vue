@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <SectionHeader v-bind:title="title" v-bind:sub-title="subTitle" />
     <b-form-group>
       <b-form-radio-group
@@ -7,7 +7,6 @@
         buttons
         button-variant="outline-secondary"
         size="sm"
-        name="buttons2"
         :options="teas"
       >
       </b-form-radio-group>
@@ -23,35 +22,33 @@ import { mutations } from "../state";
 export default {
   name: "BobaBase",
   components: {
-    SectionHeader
+    SectionHeader,
   },
   props: {
     title: String,
-    subTitle: String
+    subTitle: String,
   },
   data() {
     return {
       selected: "",
-      teas: []
+      teas: [],
     };
   },
   async mounted() {
     const response = await TeasService.getAllTeas();
     if (response) {
-      this.teas = response.data.map(tea => {
+      this.teas = response.data.map((tea) => {
         return {
           text: tea.displayName,
-          value: tea.name
+          value: tea.name,
         };
       });
     }
   },
   watch: {
-    selected: (newTea, oldTea) => {
+    selected: (newTea) => {
       mutations.updateSelectedTea(newTea);
-    }
-  }
+    },
+  },
 };
 </script>
-
-<style scoped></style>

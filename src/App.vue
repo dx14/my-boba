@@ -5,7 +5,7 @@
         <div class="">
           <AppHeader
             title="MyBoba"
-            sub-title="The Fun Way to Create Your Dream Bubble Tea!"
+            sub-title="Create your perfect bubble tea just the way you like it!"
           ></AppHeader>
         </div>
       </div>
@@ -15,30 +15,24 @@
       <div class="col-sm d-flex flex-wrap flex-column align-items-center">
         <BobaBase
           title="Base"
-          sub-title="It's important-- after all, tea is 50% of 'milk tea'!"
+          sub-title="It's important. After all, tea is 50% of 'milk tea'!"
         ></BobaBase>
         <BobaToppings
           class="mb-4"
           title="Toppings"
           sub-title="Is it really bubble tea if there are no toppings?"
         ></BobaToppings>
-        <b-button
-          class="text-center mb-3 w-100 poppins text-large"
-          size="lg"
-          variant="primary"
-          @click="finish"
-          >I'm Finished!</b-button
-        >
+        <FinishButton />
       </div>
 
       <div class="col-sm d-flex justify-content-center align-items-center">
         <img id="mascot" class="jump" src="./assets/mascot.png" />
       </div>
 
-      <div class="col-sm">
+      <div class="col-md">
         <BobaStores
           title="Locations"
-          sub-title="Bring your creation from your screen to your hands."
+          sub-title="Bring your tea from the screen to your hands."
         ></BobaStores>
       </div>
     </div>
@@ -50,7 +44,7 @@ import AppHeader from "./components/AppHeader";
 import BobaBase from "./components/BobaBase";
 import BobaToppings from "./components/BobaToppings";
 import BobaStores from "./components/BobaStores";
-import { getters } from "./state";
+import FinishButton from "./components/FinishButton";
 
 export default {
   name: "app",
@@ -58,14 +52,9 @@ export default {
     AppHeader,
     BobaBase,
     BobaToppings,
-    BobaStores
+    BobaStores,
+    FinishButton,
   },
-  methods: {
-    finish() {
-      console.log(getters.getSelectedTea());
-      console.log(getters.getSelectedToppings());
-    }
-  }
 };
 </script>
 
@@ -98,7 +87,7 @@ export default {
   display: inherit !important;
 }
 .btn-group-toggle .btn {
-  margin: 10px;
+  margin: 5px 5px 5px 5px !important;
   border-radius: 50px !important;
 }
 
@@ -121,6 +110,6 @@ export default {
   }
 }
 .jump {
-  animation: jump 5s linear alternate infinite;
+  animation: jump 4s linear alternate infinite;
 }
 </style>
