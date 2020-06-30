@@ -30,6 +30,9 @@
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.17"
   },
+  "engines": {
+    "node": "8.x"
+  },
   "eslintConfig": {
     "root": true,
     "env": {
