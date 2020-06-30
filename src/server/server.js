@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const config = require("./config");
+const serveStatic = require("serve-static");
 
 mongoose.set("useUnifiedTopology", true);
 
@@ -14,7 +15,10 @@ const topping = require("./routes/topping");
 const yelp = require("./routes/yelp");
 
 // Connect to Mongo Database
-mongoose.connect(config.database, { useNewUrlParser: true, dbName: "myboba" });
+mongoose.connect(
+  config.database,
+  { useNewUrlParser: true, dbName: "myboba" }
+);
 
 // On Connection
 mongoose.connection.on("connected", () => {
@@ -22,7 +26,7 @@ mongoose.connection.on("connected", () => {
 });
 
 // On Error
-mongoose.connection.on("error", err => {
+mongoose.connection.on("error", (err) => {
   console.log("Database error " + err);
 });
 
@@ -36,7 +40,8 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 
 // Set Static Folder
-app.use(express.static(path.join(__dirname, "/public")));
+// change to ../../src for local
+app.use(express.static(path.join(__dirname, "../../dist")));
 
 // Body Parser Middleware
 app.use(bodyParser.json());
@@ -46,17 +51,8 @@ app.use("/teas", tea);
 app.use("/toppings", topping);
 app.use("/yelp", yelp);
 
-// Index Route
-app.get("/", (req, res) => {
-  res.send("Invalid Endpoint");
-});
+// change to ../../src for local
+app.use(serveStatic(__dirname + "../../dist"));
 
-// All other routes go to index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
-});
-
-//Start Server
-app.listen(port, () => {
-  console.log("Server started on port " + port);
-});
+app.listen(port);
+console.log("server started " + port);
