@@ -5,6 +5,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const serveStatic = require("serve-static");
 
+const dbUri = process.env.MONGO_URI;
+const dbName = process.env.MONGO_DB_NAME
+
 mongoose.set("useUnifiedTopology", true);
 
 // routes
@@ -15,8 +18,8 @@ const yelp = require("./routes/yelp");
 
 // Connect to Mongo Database
 mongoose.connect(
-  process.env.DB_URI,
-  { useNewUrlParser: true, dbName: process.env.DB_NAME }
+  dbUri,
+  { useNewUrlParser: true, dbName }
 );
 
 // On Connection

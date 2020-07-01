@@ -1,38 +1,36 @@
 {
-  "name": "my-boba",
-  "version": "0.1.0",
+  "name": "myboba",
+  "version": "1.0.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node src/server/server.js",
-    "heroku-postbuild": "npm run build"
+    "start": "node src/server/server.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "babel-preset-env": "^1.7.0",
     "bootstrap-vue": "^2.15.0",
     "cors": "^2.8.5",
-    "mongodb": "^3.2.6",
-    "mongoose": "^5.8.9",
-    "vue": "^2.5.17",
+    "mongoose": "^5.9.2",
+    "vue": "^2.6.11",
     "yelp-fusion": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@vue/cli-plugin-babel": "^3.1.1",
-    "@vue/cli-plugin-eslint": "^3.1.1",
-    "@vue/cli-service": "^3.1.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
+    "@babel/core": "^7.10.4",
+    "@vue/cli-plugin-babel": "^3.12.1",
+    "@vue/cli-plugin-eslint": "^3.12.1",
+    "@vue/cli-service": "^3.12.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.3",
     "express": "^4.17.1",
-    "node-sass": "^4.10.0",
-    "sass-loader": "^7.1.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^7.3.1",
     "serve-static": "^1.14.1",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.11"
   },
   "engines": {
-    "node": "8.x"
+    "node": "12.x"
   },
   "eslintConfig": {
     "root": true,
