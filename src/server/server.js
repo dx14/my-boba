@@ -3,7 +3,6 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const config = require("./config");
 const serveStatic = require("serve-static");
 
 mongoose.set("useUnifiedTopology", true);
@@ -16,13 +15,13 @@ const yelp = require("./routes/yelp");
 
 // Connect to Mongo Database
 mongoose.connect(
-  config.database,
-  { useNewUrlParser: true, dbName: "myboba" }
+  process.env.DB_URI,
+  { useNewUrlParser: true, dbName: process.env.DB_NAME }
 );
 
 // On Connection
 mongoose.connection.on("connected", () => {
-  console.log("Connected to database " + config.database);
+  console.log("Connected to database");
 });
 
 // On Error
@@ -40,7 +39,7 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 
 // Set Static Folder
-// change to ../../src for local
+//app.use(express.static(path.join(__dirname, "../../src")));
 app.use(express.static(path.join(__dirname, "../../dist")));
 
 // Body Parser Middleware
@@ -51,7 +50,7 @@ app.use("/teas", tea);
 app.use("/toppings", topping);
 app.use("/yelp", yelp);
 
-// change to ../../src for local
+//app.use(serveStatic(__dirname + "../../src"));
 app.use(serveStatic(__dirname + "../../dist"));
 
 app.listen(port);
